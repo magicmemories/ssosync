@@ -9,12 +9,12 @@ builds:
     - CGO_ENABLED=0
   goos:
     - linux
-    - darwin
-    - windows
+    # - darwin
+    # - windows
   goarch:
-    - 386
-    - amd64
-    - arm
+    # - 386
+    # - amd64
+    # - arm
     - arm64
   ignore:
     - goos: darwin
@@ -23,6 +23,8 @@ builds:
       goarch: 386
   ldflags:
      - -s -w -X github.com/awslabs/ssosync/cmd.version={{.Version}} -X github.com/awslabs/ssosync/cmd.commit={{.Commit}} -X github.com/awslabs/ssosync/cmd.date={{.Date}} -X github.com/awslabs/ssosync/cmd.builtBy=goreleaser
+  hooks:
+    - cmd: echo {{ .Dist }}
 checksum:
   name_template: '{{ .ProjectName }}_checksums.txt'
 changelog:
@@ -41,8 +43,9 @@ archives:
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end -}}
-    formats: ["zip", "tar.gz"]
+    formats: ["tar.gz"]
     format_overrides:
     - goos: windows
       formats: zip
+  - name_
 
