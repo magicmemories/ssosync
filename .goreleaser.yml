@@ -53,6 +53,8 @@ archives:
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end -}}
     formats: ["tar.gz"]
+    builds:
+      - ssosync
     format_overrides:
     - goos: windows
       formats: zip
