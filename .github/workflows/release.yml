@@ -5,6 +5,8 @@ on:
   push:
     tags:
       - '*'
+    branches:
+      - goreleaser-testing
 
 jobs:
   test:
@@ -46,6 +48,6 @@ jobs:
         uses: goreleaser/goreleaser-action@v4
         with:
           version: latest
-          args: release --clean
+          args: release --clean --snapshot --skip-publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
